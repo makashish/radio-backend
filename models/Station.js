@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
 const stationSchema = new mongoose.Schema({
-  name: String,
-  streamUrl: String,
+  name: { type: String, required: true },
+  url: { type: String, required: true },
 });
 
-export default mongoose.model("Station", stationSchema);
+const Station = mongoose.model("Station", stationSchema);
+export default Station;
