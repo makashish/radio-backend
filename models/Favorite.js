@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const favoriteSchema = new mongoose.Schema({
-  userId: String, // Firebase UID
+const FavoriteSchema = new mongoose.Schema({
+  userId: String,
   stationName: String,
   stationUrl: String,
 });
 
-export default mongoose.model("Favorite", favoriteSchema);
+export default mongoose.model("Favorite", FavoriteSchema);
