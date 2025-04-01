@@ -9,7 +9,8 @@ router.get("/", async (req, res) => {
     const stations = await Station.find({}, { __v: 0 }); // Exclude version key
     res.json(stations);
   } catch (error) {
-    res.status(500).json({ message: "Server Error", error });
+    console.error("Error fetching stations:", error);
+    res.status(500).json({error:"Internal Server Error" });
   }
 });
 
