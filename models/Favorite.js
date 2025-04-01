@@ -1,9 +1,28 @@
-import mongoose from "mongoose";
+import express from "express";
+import Favorite from "../models/Favorite.js";
 
-const FavoriteSchema = new mongoose.Schema({
-  userId: String,
-  stationName: String,
-  stationUrl: String,
+const router = express.Router();
+
+// Fetch user favorites
+router.get("/:userId", async (req, res) => {
+  try {
+    const favorites = await Favorite.find({ userId: req.params.userId });
+    res.json(favorites);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching favorites" });
+  }
 });
 
-export default mongoose.model("Favorite", FavoriteSchema);
+// Add to favorites
+router.post("/", async (req, res) => {
+  try {
+    const { userId, stationName, stationUrl } = req.body;
+    const newFavorite = new Favorite({ userId, stationName, stationUrl });
+    await newFavorite.save();
+    res.json({ message: "Added to favorites!" });
+  } catch (error) {
+    res.status(500).json({ error: "Error adding to favorites" });
+  }
+});
+
+export default router;
