@@ -1,7 +1,15 @@
-import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("✅ MongoDB Connected Successfully"))
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
+
+import express from "express";
+
+import cors from "cors";
+
 import stationRoutes from "./routes/stationRoutes.js";
 import favoriteRoutes from "./routes/favoriteRoutes.js";
 
